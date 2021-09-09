@@ -36,29 +36,33 @@ public:
         int min_str_left, min_str_right;
 
         while(right < l1){
-            while(right < l1 && !isCover(s_char_count, t_char_count)){
-                ++s_char_count[s[right++]];
+            while(!isCover(s_char_count, t_char_count)){
+                if(right < l1){
+                    ++s_char_count[s[right]];
+                    ++right;
+                }
+                else{
+                    break;
+                }
             }
 
             if(right == l1){
                 break;
             }
             else{
-                if(right - left + 1 < min_length){
+                if(right - left < min_length){
                     min_str_left = left;
                     min_str_right = right;
-                    min_length = right - left + 1;
+                    min_length = right - left;
                 }
-            }
-
-            if(right == left){
-                return s.substr(left, 1);
             }
 
             while(left < right && t_char_count[s[++left] == 0]){
                 --s_char_count[s[left - 1]];
             };
         }
+
+        return s.substr(min_str_left, min_length);
     }
 
     bool isCover(map<char, int> &m1, map<char, int> &m2){
