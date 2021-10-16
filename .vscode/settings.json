@@ -1,6 +1,14 @@
 {
     "files.associations": {
         "chrono": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp",
+        "queue": "cpp",
+        "vector": "cpp",
+        "stack": "cpp",
+        "string": "cpp",
+        "iostream": "cpp",
+        "iterator": "cpp"
     }
 }

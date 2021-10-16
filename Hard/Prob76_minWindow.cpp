@@ -33,9 +33,9 @@ public:
 
         right = left;
         int min_length = INT_MAX;
-        int min_str_left, min_str_right;
+        int min_str_left = -1, min_str_right = -1;
 
-        while(right < l1){
+        while(right <= l1){
             while(!isCover(s_char_count, t_char_count)){
                 if(right < l1){
                     ++s_char_count[s[right]];
@@ -46,23 +46,36 @@ public:
                 }
             }
 
-            if(right == l1){
-                break;
-            }
-            else{
+            if(isCover(s_char_count, t_char_count)){
                 if(right - left < min_length){
                     min_str_left = left;
                     min_str_right = right;
                     min_length = right - left;
                 }
             }
+            else{
+                break;
+            }
 
-            while(left < right && t_char_count[s[++left] == 0]){
-                --s_char_count[s[left - 1]];
+            --s_char_count[s[left]];
+            ++left;
+            while(left < right){
+                if(t_char_count[s[left]] == 0){
+                    --s_char_count[s[left]];
+                    ++left;
+                }
+                else{
+                    break;
+                }
             };
         }
 
-        return s.substr(min_str_left, min_length);
+        if(min_str_left == -1){
+            return "";
+        }
+        else{
+            return s.substr(min_str_left, min_length);
+        }
     }
 
     bool isCover(map<char, int> &m1, map<char, int> &m2){
